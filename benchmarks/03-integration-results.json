@@ -1,0 +1,104 @@
+{
+  "backend": "keyword overlap",
+  "mean_ms": {
+    "embed": 0.0,
+    "retrieve": 0.0,
+    "llm": 1240.4,
+    "total": 1240.4
+  },
+  "results": [
+    {
+      "query": "Why is goodput more useful than raw throughput?",
+      "answer": "Based on the provided context, **Goodput is more useful than raw throughput** because it focuses on **requests per second (RPS) that met specific targets** rather than just the total capacity available.\n\nHere is the breakdown based on the text:\n\n*   **Goodput** counts only requests per second that met the **TTFT** (Target Throughput at Full Load) and **TPOT** (Target Throughput at Partial Load) targets.\n*   **Raw throughput** ignores SLOs (Service Level Objectives).\n*   **PagedAttention** removes internal fragmentation to increase memory efficiency, but this is a memory optimization, not a throughput metric.\n\nTherefore, Goodput is more useful because it provides a realistic, target-based measure of actual performance that aligns with the specific SLAs (Target Throughput at Full Load and Target Throughput at Partial Load) defined in the system, whereas raw throughput can be misleading if it ignores the actual targets being met",
+      "contexts": [
+        {
+          "id": "goodput",
+          "score": 1.0
+        },
+        {
+          "id": "paged",
+          "score": 0.0
+        },
+        {
+          "id": "radix",
+          "score": 0.0
+        }
+      ],
+      "embed_backend": "keyword overlap",
+      "timings_ms": {
+        "embed": 0.0,
+        "retrieve": 0.0,
+        "llm": 1831.6,
+        "total": 1831.7
+      },
+      "server_timings": {
+        "prompt_n": 151,
+        "prompt_ms": 165.419,
+        "predicted_n": 200,
+        "predicted_ms": 1548.326
+      }
+    },
+    {
+      "query": "What problem does PagedAttention actually solve?",
+      "answer": "PagedAttention solves the problem of **internal fragmentation in GPU memory** caused by storing the Key-Value (KV) cache in non-contiguous pages.\n\nBy partitioning the KV cache into separate pages, it allows the GPU to utilize more of its available memory, thereby reducing wasted memory that would otherwise be consumed by the internal fragmentation of contiguous memory blocks.",
+      "contexts": [
+        {
+          "id": "paged",
+          "score": 1.0
+        },
+        {
+          "id": "radix",
+          "score": 0.0
+        },
+        {
+          "id": "disagg",
+          "score": 0.0
+        }
+      ],
+      "embed_backend": "keyword overlap",
+      "timings_ms": {
+        "embed": 0.0,
+        "retrieve": 0.0,
+        "llm": 660.9,
+        "total": 660.9
+      },
+      "server_timings": {
+        "prompt_n": 114,
+        "prompt_ms": 80.205,
+        "predicted_n": 73,
+        "predicted_ms": 561.557
+      }
+    },
+    {
+      "query": "When does splitting prefill and decode help?",
+      "answer": "Splitting prefill and decode helps when the **compute-bound prefill** requires a separate memory pool to be accessed, while the **memory-bound decode** can be handled efficiently by a shared pool.\n\nSpecifically, this optimization occurs when:\n1.  **Prefill is Compute-Bound:** The prefilling phase requires significant memory bandwidth or dedicated compute resources that cannot be shared with the decoding phase.\n2.  **Decode is Memory-Bound:** The decoding phase only needs to read from a shared memory pool.\n\nBy separating these operations, the system avoids the need to split the prefill data across multiple memory pools, thereby optimizing memory bandwidth usage for the decode phase.",
+      "contexts": [
+        {
+          "id": "disagg",
+          "score": 2.0
+        },
+        {
+          "id": "radix",
+          "score": 1.0
+        },
+        {
+          "id": "batching",
+          "score": 1.0
+        }
+      ],
+      "embed_backend": "keyword overlap",
+      "timings_ms": {
+        "embed": 0.0,
+        "retrieve": 0.0,
+        "llm": 1228.6,
+        "total": 1228.7
+      },
+      "server_timings": {
+        "prompt_n": 113,
+        "prompt_ms": 78.883,
+        "predicted_n": 140,
+        "predicted_ms": 1129.432
+      }
+    }
+  ]
+}
